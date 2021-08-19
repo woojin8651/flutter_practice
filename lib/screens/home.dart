@@ -68,7 +68,7 @@ class _DailyViewPageState extends State<DailyViewPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.redAccent,
+
         padding: EdgeInsets.all(3.0),
       child: dailyPages(),
       );
@@ -76,33 +76,42 @@ class _DailyViewPageState extends State<DailyViewPage> {
   //
   Widget dailyPages(){
     return Center(
-      child: Container(
-        width: 300,
-        height: 300,
-        margin: EdgeInsets.all(30),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: PageView.builder(
-            controller:  PageController(initialPage: indexOffset,
-                viewportFraction: 0.8),
-            itemBuilder: (ctx,idx) => dayPage(pageDate.add(Duration(days: idx - indexOffset))),
-          ),
-        ),
-      ),
-    );
+           child: Container(
+              width: 300,
+              height: 600,
+              margin: EdgeInsets.all(30),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Scaffold(
+                    body: PageView.builder(
+                      physics: ScrollPhysics(
+                      ),
+                      controller:  PageController(initialPage: indexOffset,
+                          viewportFraction: 0.8),
+                      itemBuilder: (ctx,idx) => dayPage(pageDate.add(Duration(days: idx - indexOffset))),
+                    ),
+                      floatingActionButton: FloatingActionButton(
+                        child: Icon(Icons.add, color: Colors.white,),
+                        onPressed: (){
+                        },
+                      )
+                  )
+
+                ),
+
+            ),
+        );
   }
   Widget dayPage(DateTime day){
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text(dfm.format(day))),
-        actions:[
-          IconButton(icon: Icon(Icons.add, color: Colors.white),
-              onPressed: (){
-                //누르면 추가할 수 있는 dialog 띄우기
-              })],
-        backgroundColor: Colors.blue,
+        shadowColor: Colors.transparent,
+        title: Center(child: Text(dfm.format(day),style: TextStyle(
+          color: Colors.blue
+        ),)),
+        backgroundColor: Colors.white,
       ),
-      body: itemList(day),
+      body: itemList(day)
     );
   }
   Widget itemList(DateTime day){

@@ -13,5 +13,10 @@ class HomeViewModel{
     Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),
     Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),
     Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),
+    Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),
+    Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),
+    Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),
+    Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),
+    Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),
   ];
 }
