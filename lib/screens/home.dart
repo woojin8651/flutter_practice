@@ -28,12 +28,12 @@ class HomeFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text("테스트용"),
         DailyViewPage(),
       ],
     );
   }
 }
+
 
 // 뷰 페이저 있는 화면
 class DailyViewPage extends StatefulWidget {
@@ -68,6 +68,7 @@ class _DailyViewPageState extends State<DailyViewPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.redAccent,
         padding: EdgeInsets.all(3.0),
       child: dailyPages(),
       );
@@ -78,47 +79,55 @@ class _DailyViewPageState extends State<DailyViewPage> {
       child: Container(
         width: 300,
         height: 300,
-        child: PageView.builder(
-          controller:  PageController(initialPage: indexOffset),
-          itemBuilder: (ctx,idx) => dayPage(pageDate.add(Duration(days: idx - indexOffset))),
-        )
-        ,
+        margin: EdgeInsets.all(30),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: PageView.builder(
+            controller:  PageController(initialPage: indexOffset,
+                viewportFraction: 0.8),
+            itemBuilder: (ctx,idx) => dayPage(pageDate.add(Duration(days: idx - indexOffset))),
+          ),
+        ),
       ),
     );
   }
   Widget dayPage(DateTime day){
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text(dfm.format(day))),
+        actions:[
+          IconButton(icon: Icon(Icons.add, color: Colors.white),
+              onPressed: (){
+                //누르면 추가할 수 있는 dialog 띄우기
+              })],
+        backgroundColor: Colors.blue,
+      ),
+      body: itemList(day),
+    );
+  }
+  Widget itemList(DateTime day){
     return FutureBuilder<List<Item>>(
       future: this.vm.fetchDayBusket(day),
       builder: (context,snapshot){
         if(snapshot.hasData){
-          return itemList(snapshot.data, day);
+          return ListView(
+            children: snapshot.data.map((e) => ListTile(
+              title: Text(e.name),
+              subtitle: Text("${e.amount} => ${e.cost}원"),
+            )).toList(),
+          );
         }
         else if(snapshot.hasError){
           return Text("에러");
         }
-        return CircularProgressIndicator();
+        return Center(
+          child: SizedBox(
+            child: CircularProgressIndicator(),
+            height: 100,
+            width: 100,
+          ),
+        );
       },
-    );
-  }
-  Widget itemList(List<Item> data,DateTime day){
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(dfm.format(day)),
-        actions: [
-          IconButton(icon: Icon(Icons.add,
-          color: Colors.white),
-              onPressed: (){
-                //누르면 추가할 수 있는 dialog 띄우기
-              })
-        ],
-        backgroundColor: Colors.blue,
-      ),
-      body: ListView(
-        children: data.map((e) => ListTile(
-          title: Text(e.name),
-          subtitle: Text("${e.amount} => ${e.cost}원"),
-        )).toList(),
-      ),
     );
   }
 }

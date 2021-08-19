@@ -6,7 +6,12 @@ class HomeViewModel{
   Future<List<Item>> fetchDayBusket(DateTime day) async{
 
     return Future.delayed(Duration(milliseconds: 300),(){
-      return [];
+      return sample;
     });
   }
+  List<Item> sample = [
+    Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),
+    Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),
+    Item(date: DateTime.now(),name: "감자",cost: 100,amount: 300),
+  ];
 }
