@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'screens/home.dart';
 import 'package:flutter_practice_app/screens/home.dart';
 import 'package:http/http.dart';
-void main()=>runApp(WeatherApp());
+void main()=>runApp(MyApp());
 
-class WeatherApp extends StatelessWidget {
-  const WeatherApp({Key key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
