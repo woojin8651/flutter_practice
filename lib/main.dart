@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_practice_app/extension/Colors.dart';
+import 'package:flutter_practice_app/screens/loading.dart';
 import 'screens/home.dart';
 import 'package:flutter_practice_app/screens/home.dart';
 import 'package:http/http.dart';
@@ -13,12 +15,44 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title:'Shopping Busket',
-      initialRoute: '/',
-      routes: {
-        '/': (context)=>Home(),
-      },
       theme: ThemeData(
+        fontFamily: 'NanumGothic',
         primarySwatch: Colors.blue,
+      ),
+      home: Main(),
+    );
+  }
+}
+class Main extends StatefulWidget {
+  const Main({Key key}) : super(key: key);
+
+  @override
+  _MainState createState() => _MainState();
+}
+
+class _MainState extends State<Main> {
+  int currIdx = 0;
+  final List<Widget> Pages = [Home(),Loading()];
+  void onTap(int idx){
+    setState(() {
+      currIdx = idx;
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Pages[currIdx],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: onTap,
+        currentIndex: currIdx,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home),
+              label: "Home",),
+          BottomNavigationBarItem(icon: Icon(Icons.settings),
+              label: "setting",)
+        ],
+        selectedItemColor: Colors.grey[700],
+        unselectedItemColor: Colors.grey,
       ),
     );
   }

@@ -8,7 +8,7 @@ import 'item.dart';
 class DBHelper{
   static Future<sql.Database> database() async{
     var docDir = await sql.getDatabasesPath();
-    final dbPath = path.join(docDir,'item_datebase2.db');
+    final dbPath = path.join(docDir,'item_datebase.db');
     return await sql.openDatabase(
         dbPath,
     version: 1,
