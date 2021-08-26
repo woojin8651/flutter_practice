@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_app/extension/Colors.dart';
 import 'package:flutter_practice_app/screens/loading.dart';
-import 'screens/home.dart';
-import 'package:flutter_practice_app/screens/home.dart';
+import 'screens/Home.dart';
+import 'package:flutter_practice_app/screens/Home.dart';
 import 'package:http/http.dart';
 void main()=>runApp(MyApp());
 

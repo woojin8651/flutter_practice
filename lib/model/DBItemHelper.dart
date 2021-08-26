@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart' as path;
-import 'item.dart';
+import 'Item.dart';
 class DBHelper{
   static Future<sql.Database> database() async{
     var docDir = await sql.getDatabasesPath();

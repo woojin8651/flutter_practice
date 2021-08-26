@@ -1,43 +1,11 @@
+// 뷰 페이저 있는 화면
 import 'dart:developer';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_app/extension/Colors.dart';
-import 'package:flutter_practice_app/model/item.dart';
-import 'package:flutter_practice_app/viewmodel/homeVM.dart';
+import 'package:flutter_practice_app/model/Item.dart';
+import 'package:flutter_practice_app/viewmodel/HomeVM.dart';
 import 'package:flutter_practice_app/extension/date_extention.dart';
 import 'ItemDialog.dart';
-
-class Home extends StatelessWidget {
-  const Home({Key key}) : super(key: key);
-  static const TextStyle style = TextStyle(
-    fontSize: 30
-  );
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-
-      child: Scaffold(
-      body: HomeFragment(),
-        backgroundColor: Colors.transparent,
-      ),
-    );
-  }
-}
-
-// 프레그먼트 화면
-class HomeFragment extends StatelessWidget {
-  const HomeFragment({Key key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: [
-          DailyViewPage(),
-      ],
-    );
-  }
-}
-
-// 뷰 페이저 있는 화면
 class DailyViewPage extends StatefulWidget {
 
   @override
@@ -74,7 +42,7 @@ class _DailyViewPageState extends State<DailyViewPage> {
     return Container(
       padding: EdgeInsets.all(10.0),
       child: dailyPages(),
-      );
+    );
   }
   //
   Widget dailyPages(){
@@ -92,10 +60,10 @@ class _DailyViewPageState extends State<DailyViewPage> {
                       viewportFraction: 0.7),
                   itemBuilder: (ctx,idx) {
                     return dayPage(pageDate.add(Duration(days: idx - indexOffset)));
-                    },
+                  },
                   onPageChanged: (idx){
                     setCurrDate(pageDate.add(Duration(days: idx - indexOffset)));
-                    },
+                  },
                 ),
                 floatingActionButton: FloatingActionButton(
                   elevation: 0,
@@ -103,7 +71,7 @@ class _DailyViewPageState extends State<DailyViewPage> {
                   child: Icon(Icons.add, color: AppColors.BgColorD,),
                   onPressed: (){
                     showItemDialog();
-                    },
+                  },
                 )
             ),
           )
@@ -118,15 +86,15 @@ class _DailyViewPageState extends State<DailyViewPage> {
   }
   Widget dayPage(DateTime day){
     return Scaffold(
-      appBar: AppBar(
-        shadowColor: Colors.transparent,
-        title: Center(child: Text( Formats.dfm.format(day),
-          style: title_style(day))
+        appBar: AppBar(
+          shadowColor: Colors.transparent,
+          title: Center(child: Text( Formats.dfm.format(day),
+              style: title_style(day))
+          ),
+          backgroundColor: Colors.transparent,
         ),
-        backgroundColor: Colors.transparent,
-      ),
-      body:ItemLoadModel(day, ret: makeItemList, err: Text("에러")),
-      backgroundColor:Colors.grey[300].withOpacity(0.2)
+        body:ItemLoadModel(day, ret: makeItemList, err: Text("에러")),
+        backgroundColor:Colors.grey[300].withOpacity(0.2)
     );
   }
 // ignore: non_constant_identifier_names
@@ -183,7 +151,7 @@ class _DailyViewPageState extends State<DailyViewPage> {
             )).toList(),
           ),
         ),
-        ////////////원모양 그래프////////////////////
+        ////////////총합////////////////////
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(child: ItemColor("총 비용은 ${data.fold(0, (sum, e) => sum+e.cost)}원")),
@@ -202,6 +170,3 @@ class _DailyViewPageState extends State<DailyViewPage> {
 class ItemColor extends Text{
   ItemColor(String str):super(str, style: TextStyle(color: Colors.white.withOpacity(0.7)));
 }
-
-
-

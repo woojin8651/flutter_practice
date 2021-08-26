@@ -34,6 +34,7 @@ dependencies:
   path_provider: ^2.0.2
   path: ^1.8.0
   intl:
+  pie_chart:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -73,11 +74,11 @@ flutter:
          - asset: assets/font/BlackHanSans-Regular.ttf
     - family: NanumGothic
       fonts:
-        - asset: assets/NanumGothic-Regular.ttf
+        - asset: assets/font/NanumGothic-Regular.ttf
           weight: 200
-        - asset: NanumGothic-Bold.ttf
+        - asset: assets/font/NanumGothic-Bold.ttf
           weight: 300
-        - asset: NanumGothic-ExtraBold.ttf
+        - asset: assets/font/NanumGothic-ExtraBold.ttf
           weight: 400
   #         - asset: fonts/Schyler-Italic.ttf
 #           style: italic

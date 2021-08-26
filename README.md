@@ -1,6 +1,10 @@
 # flutter_practice_app
 
-A new Flutter application.
+## 목표
+간단한 sqflite 활용 crud 및 분석 앱
+
+## 용도
+예산 관리 어플리케이션
 
 ## Getting Started
 

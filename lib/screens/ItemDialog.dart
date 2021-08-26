@@ -3,8 +3,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_app/extension/date_extention.dart';
-import 'package:flutter_practice_app/model/item.dart';
-import 'package:flutter_practice_app/viewmodel/homeVM.dart';
+import 'package:flutter_practice_app/model/Item.dart';
+import 'package:flutter_practice_app/viewmodel/HomeVM.dart';
 
 class ItemDialog extends StatefulWidget {
   Function refresh;
