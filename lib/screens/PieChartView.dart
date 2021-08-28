@@ -20,6 +20,7 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
   AnimationController _controller;
   DateTime _pageDate;
   Budget curBudget;
+  int curIdx;
   PieVM vm;
   List<Icon> icons = [Icon(Icons.add,color: Colors.white)
     ,Icon(Icons.delete,color: Colors.white)
@@ -60,9 +61,6 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
               future: vm.fetchPie(_pageDate),
               builder: (ctx,snapshot){
                 if(snapshot.hasData){
-                  if((snapshot.data as List<PieSet>).isNotEmpty) {
-                    curBudget = (snapshot.data as List<PieSet>)[0].budget;
-                  }
                   return budgetChart(snapshot.data);
                 }
                 else if(snapshot.hasError){
@@ -83,14 +81,20 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
       ),
     );
   }
+  var _pageController = PageController(
+      initialPage: 0,
+      viewportFraction: 0.7,
+      keepPage: false
+  );
   Widget budgetChart(List<PieSet> datas){
     return PageView.builder(
         onPageChanged: (idx){
-          curBudget  = datas[idx].budget;
+          setState(() {
+            curBudget  = datas[idx].budget;
+            curIdx = idx;
+          });
         },
-        controller: PageController(
-          viewportFraction: 0.7
-        ),
+        controller: _pageController,
         itemCount: datas.length,
         itemBuilder: (ctx,idx){
           return Center(
@@ -137,14 +141,17 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
       color: Colors.white,
       fontSize: 16.0);
 
-  void pressFAB(int idx){
+  void pressFAB(int idx) async{
     switch(idx){
       case 0:
         showBudgetDialog();
         break;
       case 1:
-        if(curBudget != null)
-          showBudgetDeleteDialog(curBudget);
+          List<PieSet> datas = await vm.fetchPie(_pageDate);
+          if(datas.isEmpty) break;
+          showBudgetDeleteDialog(datas[curIdx].budget);
+          if(curIdx == datas.length - 1 && curIdx != 0) curIdx--;
+          //끝 항목 삭제시 한칸 당겨짐
         break;
     }
   }

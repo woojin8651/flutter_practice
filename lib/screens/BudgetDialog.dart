@@ -184,8 +184,9 @@ class _BudgetDialogState extends State<BudgetDialog> {
 }
 
 class BudgetDeleteDialog extends StatelessWidget {
-  BudgetDeleteDialog({@required this.budget,@required this.refresh});
+  BudgetDeleteDialog({@required this.budget,@required this.refresh,this.callback});
   Function refresh;
+  Function callback;
   Budget budget;
   PieVM vm = PieVM.instance();
   @override
