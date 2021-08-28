@@ -85,9 +85,12 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
   }
   Widget budgetChart(List<PieSet> datas){
     return PageView.builder(
-      onPageChanged: (idx){
-        curBudget  = datas[idx].budget;
-      },
+        onPageChanged: (idx){
+          curBudget  = datas[idx].budget;
+        },
+        controller: PageController(
+          viewportFraction: 0.7
+        ),
         itemCount: datas.length,
         itemBuilder: (ctx,idx){
           return Center(
@@ -97,7 +100,8 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
                   child: Text("예산: ${datas[idx].budget.total}원")
                 ),
                 Center(
-                    child: Text("사용: ${datas[idx].PieData[PieVM.PieItem].toInt()}원")
+                    child: datas[idx].PieData[PieVM.PieItem] != null ?
+                    Text("사용: ${ datas[idx].PieData[PieVM.PieItem].toInt()}원"): Text("사용: 0원")
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -114,7 +118,6 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
                   width: MediaQuery.of(context).size.width*2/3,
                   height: MediaQuery.of(context).size.width*2/3,
                   child: PieChart(
-
                     dataMap: datas[idx].PieData,
                     animationDuration: Duration(milliseconds: 800),
                     chartRadius: MediaQuery.of(context).size.width/3.2,
