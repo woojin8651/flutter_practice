@@ -115,7 +115,7 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
                     children: [
                       Text(datas[idx].budget.stDay),
                       Text("~"),
-                      Text(datas[idx].budget.stDay),
+                      Text(datas[idx].budget.edDay),
                     ],
                   ),
                 ),

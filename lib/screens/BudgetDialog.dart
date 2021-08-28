@@ -51,12 +51,12 @@ class _BudgetDialogState extends State<BudgetDialog> {
     suffixText: "원"
   );
   final stStyle = TextStyle(
-    backgroundColor: AppColors.BgColorB,
-    color: Colors.white,
+
+    color: Colors.black,
   );
   final edStyle = TextStyle(
-      backgroundColor: AppColors.BgColorD,
-      color: Colors.white
+
+    color: Colors.black,
   );
 
   @override
