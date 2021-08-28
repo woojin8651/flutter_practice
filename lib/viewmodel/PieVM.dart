@@ -24,14 +24,14 @@ class PieVM{
         int iSum = iList.where((item) =>
             DateCalculation.inRange(budget.stDay, budget.edDay, item.date))
             .fold(0, (sum, e) => sum + e.cost);
-        if(iSum >= budget.total) PieSets.add(PieSet(budget,{PieLeft:iSum.toDouble()}));
+        if(iSum >= budget.total) PieSets.add(PieSet(budget,{PieItem:iSum.toDouble()}));
         else PieSets.add(PieSet(budget,{PieLeft:(budget.total - iSum).toDouble(), PieItem:iSum.toDouble()}));
       }
       else{ // 반복 o
         int iSum = iList.where((item) =>
             DateCalculation.inRangeR(day, budget.repeatDay, budget.repeatP, item.date))
             .fold(0, (sum, e) => sum + e.cost);
-        if(iSum >= budget.total) PieSets.add(PieSet(budget,{PieLeft:iSum.toDouble()}));
+        if(iSum >= budget.total) PieSets.add(PieSet(budget,{PieItem:iSum.toDouble()}));
         else PieSets.add(PieSet(budget, {PieLeft:(budget.total - iSum).toDouble(), PieItem:iSum.toDouble()}));
       }
     });
