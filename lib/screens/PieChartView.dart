@@ -33,6 +33,7 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
   @override
   void initState() {
     super.initState();
+    curIdx = 0;
     vm = PieVM.instance();
     _pageDate = DateTime.now();
     _controller = AnimationController(
