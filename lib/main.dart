@@ -18,6 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'NanumGothic',
         primarySwatch: Colors.blue,
+        primaryColor: AppColors.BgColorD,
+        accentColor: Colors.redAccent
       ),
       home: Main(),
     );

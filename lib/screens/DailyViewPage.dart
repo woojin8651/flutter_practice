@@ -7,7 +7,8 @@ import 'package:flutter_practice_app/viewmodel/HomeVM.dart';
 import 'package:flutter_practice_app/extension/date_extention.dart';
 import 'ItemDialog.dart';
 class DailyViewPage extends StatefulWidget {
-
+  DailyViewPage({this.refresh});
+  Function refresh;
   @override
   _DailyViewPageState createState() => _DailyViewPageState();
 }
@@ -31,14 +32,13 @@ class _DailyViewPageState extends State<DailyViewPage> {
   @override
   void initState() {
     super.initState();
-
+    pageDate = DateTime.now();
+    setCurrDate(pageDate);
+    log("DailyViewPageInitSate");
   }
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      pageDate = DateTime.now(); //오늘
-    });
     return Container(
       padding: EdgeInsets.all(10.0),
       child: dailyPages(),
@@ -143,7 +143,7 @@ class _DailyViewPageState extends State<DailyViewPage> {
                 child: ListTile(
                   onLongPress: () async{
                     await showDialog(context: context,
-                        builder: (ctx) => ItemLongDialog(item: e,refresh: refresh,));
+                        builder: (ctx) => ItemLongDialog(item: e,refresh: this.widget.refresh,));
                   },
                   title: ItemColor(e.name),
                   subtitle: ItemColor("${e.amount} => ${e.cost}원"),
@@ -162,7 +162,7 @@ class _DailyViewPageState extends State<DailyViewPage> {
 
   void showItemDialog() async{
     await showDialog(context: context,
-        builder: (ctx) => ItemDialog(refresh: refresh,date: currDate,));
+        builder: (ctx) => ItemDialog(refresh: this.widget.refresh,date: currDate,));
   }
 
 }

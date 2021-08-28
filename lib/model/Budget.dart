@@ -8,6 +8,13 @@ class Budget{
   static const String sql_stDay="stDay";
   static const String sql_edDay="edDay";
 
+  static const String repeatMonth = "month";
+  static const String repeatYear = "year";
+  static const int modeUnRepeat = 0;
+  static const int modeRepeat = 1;
+  static const int defaultRepeatDay = 0;
+  static const String defaultRepeatP = "미정";
+  static const String defaultDay = "0000-00-00";
   String id; //고유 아이디
   int total; //기간 예산안
   int repeat; //반복형인지 0이면 반복x 1이면 반복d

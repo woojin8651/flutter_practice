@@ -16,9 +16,9 @@ class DBBudgetHelper{
              ${Budget.sql_id} INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
              ${Budget.sql_total} INTEGER,
              ${Budget.sql_repeat} INTEGER,
-             ${Budget.sql_repeatDay} TEXT,
+             ${Budget.sql_repeatDay} INTEGER,
              ${Budget.sql_repeatP} TEXT,
-             ${Budget.sql_stDay} TEXT)
+             ${Budget.sql_stDay} TEXT,
              ${Budget.sql_edDay} TEXT)"""
           );
         });

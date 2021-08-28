@@ -20,9 +20,10 @@ class _ItemDialogState extends State<ItemDialog> {
   HomeViewModel vm = HomeViewModel.instance();//home 화면 뷰모델
   String statement="";
 
-  final textDecoration = (String hint) => InputDecoration(
+  final textDecoration = (String hint,{String sf}) => InputDecoration(
       border: OutlineInputBorder(),
-      labelText: hint
+      labelText: hint,
+      suffixText: sf
   );
 
   final nameTec = TextEditingController();
@@ -58,7 +59,7 @@ class _ItemDialogState extends State<ItemDialog> {
           borderRadius: BorderRadius.circular(10.0)),
       content: content(),
       actions: [
-        TextButton(onPressed: clickAdd , child: Text("추가")),
+        TextButton(onPressed: () => clickAdd() , child: Text("추가")),
         TextButton(onPressed: () => clickCancel(context), child: Text("취소")),
       ],
     );

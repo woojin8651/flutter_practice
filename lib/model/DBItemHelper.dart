@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart' as path;
 import 'Item.dart';
-class DBHelper{
+class DBItemHelper{
   static Future<sql.Database> database() async{
     var docDir = await sql.getDatabasesPath();
     final dbPath = path.join(docDir,'item_datebase.db');

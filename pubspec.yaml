@@ -35,6 +35,8 @@ dependencies:
   path: ^1.8.0
   intl:
   pie_chart:
+  flutter_speed_dial: ^3.0.0
+  syncfusion_flutter_datepicker: ^19.2.57
 dev_dependencies:
   flutter_test:
     sdk: flutter

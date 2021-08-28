@@ -12,14 +12,14 @@ class HomeViewModel{
 
   Future<List<Item>> fetchDayBusket(DateTime day) async{
 
-      var list = await DBHelper.getItem();
+      var list = await DBItemHelper.getItem();
       log(list.toString());
       return list.where((item) => Formats.dfm.format(day) == item.date).toList();
   }
 
   Future<void> addNewItem(Item item) async{
     try{
-      await DBHelper.insertItem(item);
+      await DBItemHelper.insertItem(item);
     }catch(e){
       throw Exception("insert error");
     }
@@ -27,7 +27,7 @@ class HomeViewModel{
 
   Future<void> modifyItem(Item item) async{
     try{
-      await DBHelper.updateItem(item);
+      await DBItemHelper.updateItem(item);
     }catch(e){
       throw Exception("insert error");
     }
@@ -35,7 +35,7 @@ class HomeViewModel{
 
   Future<void> deleteItem(Item item) async{
     try{
-      await DBHelper.deleteItem(item);
+      await DBItemHelper.deleteItem(item);
     }catch(e){
       throw Exception("insert error");
     }
