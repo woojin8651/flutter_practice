@@ -205,10 +205,10 @@ class BudgetDeleteDialog extends StatelessWidget {
   void onPressedDelete(BuildContext ctx) async{
     await vm.deleteBudget(budget);
     this.refresh();
-    Navigator.pop(ctx);
+    Navigator.pop(ctx,true);
   }
   void onPressedCancel(BuildContext ctx){
-    Navigator.pop(ctx);
+    Navigator.pop(ctx,false);
   }
 }
 

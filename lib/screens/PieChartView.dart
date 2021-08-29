@@ -150,8 +150,9 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
       case 1:
           List<PieSet> datas = await vm.fetchPie(_pageDate);
           if(datas.isEmpty) break;
-          showBudgetDeleteDialog(datas[curIdx].budget);
-          if(curIdx == datas.length - 1 && curIdx != 0) curIdx--;
+          if(await showBudgetDeleteDialog(datas[curIdx].budget)){
+            if(curIdx == datas.length - 1 && curIdx != 0) curIdx--;
+          }
           //끝 항목 삭제시 한칸 당겨짐
         break;
     }
@@ -212,8 +213,8 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
     await showDialog(context: context,
         builder: (ctx) => BudgetDialog(refresh:this.widget.refresh));
   }
-  void showBudgetDeleteDialog(Budget budget) async{
-    await showDialog(context: context, builder: (ctx)=> BudgetDeleteDialog(
+  Future<bool> showBudgetDeleteDialog(Budget budget) async{
+    return await showDialog(context: context, builder: (ctx)=> BudgetDeleteDialog(
       budget: budget,
       refresh: refresh,
     ));
