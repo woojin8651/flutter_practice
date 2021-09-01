@@ -145,8 +145,9 @@ class _DailyViewPageState extends State<DailyViewPage> {
                     await showDialog(context: context,
                         builder: (ctx) => ItemLongDialog(item: e,refresh: this.widget.refresh,));
                   },
-                  title: ItemColor(e.name),
-                  subtitle: ItemColor("${e.amount} => ${e.cost}원"),
+                  title: ItemTitleText(e.name),
+                  subtitle: ItemContentText("${e.amount}개  ${e.cost}원\n"
+                      "1개 당 ${(e.cost / e.amount).toDouble()}원"),
                 )
             )).toList(),
           ),
@@ -154,7 +155,7 @@ class _DailyViewPageState extends State<DailyViewPage> {
         ////////////총합////////////////////
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Center(child: ItemColor("총 비용은 ${data.fold(0, (sum, e) => sum+e.cost)}원")),
+          child: Center(child: ItemContentText("총 비용은 ${data.fold(0, (sum, e) => sum+e.cost)}원")),
         )
       ],
     );
@@ -167,6 +168,9 @@ class _DailyViewPageState extends State<DailyViewPage> {
 
 }
 
-class ItemColor extends Text{
-  ItemColor(String str):super(str, style: TextStyle(color: Colors.white.withOpacity(0.7)));
+class ItemContentText extends Text{
+  ItemContentText(String str):super(str, style: TextStyle(color: Colors.white.withOpacity(0.7)));
+}
+class ItemTitleText extends Text{
+  ItemTitleText(String str):super(str, style: TextStyle(fontFamily: "BlackHanSans",color: Colors.white.withOpacity(1)));
 }

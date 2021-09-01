@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_practice_app/extension/date_extention.dart';
 import 'package:flutter_practice_app/model/Item.dart';
 import 'package:flutter_practice_app/viewmodel/HomeVM.dart';
-
+import 'package:flutter_practice_app/model/Unit.dart';
 class ItemDialog extends StatefulWidget {
   Function refresh;
   DateTime date;
@@ -19,6 +19,7 @@ class _ItemDialogState extends State<ItemDialog> {
 
   HomeViewModel vm = HomeViewModel.instance();//home 화면 뷰모델
   String statement="";
+  int _unitValue = Unit.U_Undefine;
 
   final textDecoration = (String hint,{String sf}) => InputDecoration(
       border: OutlineInputBorder(),
@@ -42,6 +43,7 @@ class _ItemDialogState extends State<ItemDialog> {
         name: nameTec.text,
         cost: int.parse(costTec.text),
         amount: int.parse(amountTec.text),
+        unitCode: _unitValue
       ));
       this.widget.refresh();
       Navigator.pop(context);
@@ -76,11 +78,21 @@ class _ItemDialogState extends State<ItemDialog> {
             ListTile(title: TextField(decoration: textDecoration("상품명"),controller:nameTec,),),
             ListTile(title: TextField(keyboardType: TextInputType.number,decoration: textDecoration("가격"),controller:costTec,),),
             ListTile(title: TextField(keyboardType: TextInputType.number,decoration: textDecoration("수량"),controller:amountTec,),),
-            Text(statement)
+            Text(statement),
+            RadioListTile<int>(title: Text("기타"),value: Unit.U_Undefine, groupValue: _unitValue, onChanged: setUnit,),
+            RadioListTile<int>(title: Text("식재료"),value: Unit.U_FIngredident, groupValue: _unitValue, onChanged: setUnit),
+            RadioListTile<int>(title: Text("부가비용"),value: Unit.U_additional, groupValue: _unitValue, onChanged: setUnit),
+            RadioListTile<int>(title: Text("유흥비"),value: Unit.U_Entertainment, groupValue: _unitValue, onChanged: setUnit),
+            RadioListTile<int>(title: Text("장비"),value: Unit.U_Equipment, groupValue: _unitValue, onChanged: setUnit),
           ],
         ),
       ),
     );
+  }
+  void setUnit(int unit){
+    setState(() {
+      _unitValue = unit;
+    });
   }
 }
 class ItemLongDialog extends StatelessWidget {
@@ -107,14 +119,14 @@ class ItemLongDialog extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0)),
+      title: Center(child: Text("해당 항목을 삭제합니까?")),
       content: Container(
         width: 200,
-        height: 200,
+        height: 150,
         child: Center(
           child: ListView(
             shrinkWrap: true,
             children: [
-              TextButton(onPressed: () => clickModify(context), child: Text("수정")),
               TextButton(onPressed: () => clickDelete(context), child: Text("삭제")),
               TextButton(onPressed: () => clickCancel(context), child: Text("취소")),
             ],

@@ -19,12 +19,11 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
 
   AnimationController _controller;
   DateTime _pageDate;
-  Budget curBudget;
   int curIdx;
   PieVM vm;
   List<Icon> icons = [Icon(Icons.add,color: Colors.white)
     ,Icon(Icons.delete,color: Colors.white)
-    ,Icon(Icons.edit,color: Colors.white)];
+    ,Icon(Icons.analytics,color: Colors.white)];
   void refresh(){
     setState(() {
     });
@@ -91,7 +90,6 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
     return PageView.builder(
         onPageChanged: (idx){
           setState(() {
-            curBudget  = datas[idx].budget;
             curIdx = idx;
           });
         },
@@ -124,11 +122,13 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
                   height: MediaQuery.of(context).size.width*2/3,
                   child: PieChart(
                     dataMap: datas[idx].PieData,
-                    animationDuration: Duration(milliseconds: 800),
+                    animationDuration: Duration(milliseconds: 1000),
                     chartRadius: MediaQuery.of(context).size.width/3.2,
                     chartType: ChartType.ring,
+                    ringStrokeWidth: 10.0,
                     chartValuesOptions: ChartValuesOptions(
-                      showChartValuesInPercentage: true
+                      showChartValuesInPercentage: true,
+                      chartValueBackgroundColor: Colors.transparent
                     ),
                   ),
                 ),
@@ -148,12 +148,16 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
         showBudgetDialog();
         break;
       case 1:
-          List<PieSet> datas = await vm.fetchPie(_pageDate);
-          if(datas.isEmpty) break;
-          if(await showBudgetDeleteDialog(datas[curIdx].budget)){
-            if(curIdx == datas.length - 1 && curIdx != 0) curIdx--;
-          }
-          //끝 항목 삭제시 한칸 당겨짐
+        List<PieSet> datas = await vm.fetchPie(_pageDate);
+        if(datas.isEmpty) break;
+        if(await showBudgetDeleteDialog(datas[curIdx].budget)){
+          if(curIdx == datas.length - 1 && curIdx != 0) curIdx--;
+        }//끝 항목 삭제시 한칸 당겨짐
+        break;
+      case 2:
+        List<PieSet> datas = await vm.fetchPie(_pageDate);
+        if(datas.isEmpty) break;
+        showBudgetAnalyzeDialog(_pageDate,datas[curIdx].budget);
         break;
     }
   }
@@ -217,6 +221,12 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
     return await showDialog(context: context, builder: (ctx)=> BudgetDeleteDialog(
       budget: budget,
       refresh: refresh,
+    ));
+  }
+  void showBudgetAnalyzeDialog(DateTime day,Budget budget) async{
+    return await showDialog(context: context,builder: (ctx) => BudgetAnalyzeDialog(
+      budget: budget,
+      day: day,
     ));
   }
 }

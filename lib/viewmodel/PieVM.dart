@@ -1,3 +1,8 @@
+import 'dart:developer';
+
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_practice_app/extension/Colors.dart';
 import 'package:flutter_practice_app/extension/date_extention.dart';
 import 'package:flutter_practice_app/model/Budget.dart';
 import 'package:flutter_practice_app/model/DBBudgetHelper.dart';
@@ -36,6 +41,42 @@ class PieVM{
       }
     });
     return PieSets;
+  }
+  Future<List<RadarDataSet>> fetchRadar(DateTime day,Budget budget) async{
+    List<Item> iList = await DBItemHelper.getItem();
+    List<double> cost = [1,1,1,1,1];
+    List<RadarDataSet> dataSet = [];
+    if(budget.repeat == 0){
+      iList.where((item) =>
+          DateCalculation.inRange(budget.stDay, budget.edDay, item.date))
+          .forEach((item) {
+            cost[item.unitCode] += item.cost.toDouble();
+      });
+      double sum = cost.fold(0.0, (pre, item) => pre + item);
+      cost = cost.map((e){
+        if(e/sum >0.1) return e/sum;
+        else return 0.1;
+      }).toList();
+      log("sum = $sum, cost => ${cost.toString()}");
+    }
+    else{
+      iList.where((item) =>
+          DateCalculation.inRangeR(day, budget.repeatDay, budget.repeatP, item.date))
+          .forEach((item) {
+        cost[item.unitCode] += item.cost.toDouble();
+      });
+      double sum = cost.fold(0.0, (pre, item) => pre + item);
+      cost = cost.map((e){
+        if(e/sum >0.1) return e/sum;
+        else return 0.1;
+      }).toList();
+    }
+    dataSet.add(RadarDataSet(
+      fillColor: AppColors.BgColorD.withOpacity(0.5),
+      borderColor: AppColors.BgColorD,
+      dataEntries: cost.map((e) => RadarEntry(value: e)).toList(),
+    ));
+    return dataSet;
   }
   Future<void> insertBudget(Budget budget) async{
     try{

@@ -1,7 +1,11 @@
+import 'dart:developer';
+
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_practice_app/extension/Colors.dart';
 import 'package:flutter_practice_app/model/Budget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_app/extension/date_extention.dart';
+import 'package:flutter_practice_app/model/Unit.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:flutter_practice_app/viewmodel/PieVM.dart';
 class BudgetDialog extends StatefulWidget {
@@ -212,6 +216,106 @@ class BudgetDeleteDialog extends StatelessWidget {
   }
 }
 
+class BudgetAnalyzeDialog extends StatelessWidget {
+  PieVM vm = PieVM.instance();
+  DateTime day;
+  Budget budget;
+
+  BudgetAnalyzeDialog({@required this.day,@required this.budget});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0)
+      ),
+      title: Center(
+        child: Text("소비 분석"),
+      ),
+      content: content(),
+      actions: [
+        TextButton(onPressed: () => onPressedCancel(context), child: Text("닫기"))
+      ],
+    );
+  }
+  void onPressedCancel(BuildContext ctx){
+    Navigator.pop(ctx);
+  }
+
+  Widget content() {
+    return FutureBuilder(
+      future: vm.fetchRadar(day, budget),
+        builder: (cxt,snapshot){
+        if(snapshot.hasData){
+          return Container(
+              width: 400,
+              height: 400,
+              child: RadarChart(
+                RadarChartData(
+
+                  dataSets: snapshot.data,
+                  radarBackgroundColor: Colors.transparent,
+                  borderData: FlBorderData(show: false),
+                  radarBorderData: const BorderSide(color: Colors.transparent),
+                  tickBorderData: const BorderSide(color: Colors.transparent),
+                  gridBorderData:  BorderSide(color: Colors.grey.withOpacity(0.5)),
+                  tickCount: 2,
+                  ticksTextStyle: TextStyle(
+                    fontSize: 10
+                  ),
+                  getTitle: (idx){
+                    switch(idx){
+                      case 0:
+                        return "기타";
+                      case 1:
+                        return "식재료";
+                      case 2:
+                        return "부가비용";
+                      case 3:
+                        return "유흥비";
+                      case 4:
+                        return "장비";
+                      default:
+                        return '';
+                    }
+                  }
+                ),
+                swapAnimationCurve: Curves.linear,
+                swapAnimationDuration: Duration(milliseconds: 1000),
+              )
+            );
+        }else if(snapshot.hasError){
+          return Center(
+            child: Text("에러"),
+          );
+        }
+        return Center(
+          child: SizedBox(
+            child: CircularProgressIndicator(),
+            height: 100,
+            width: 100,
+          ),
+        );
+      });
+  }
+}
+//vertices: [
+//                     PreferredSize(child:  Text("기타"),
+//                         preferredSize: Size.square(10)),
+//                     PreferredSize(child:  Text("식재료"),
+//                         preferredSize: Size.square(10)),
+//                     PreferredSize(child:  Text("부가비용"),
+//                         preferredSize: Size.square(10)),
+//                     PreferredSize(child:  Text("유흥비"),
+//                         preferredSize: Size.square(10)),
+//                     PreferredSize(child:  Text("장비"),
+//                         preferredSize: Size.square(10)),
+//                   ]
+//  static const int U_Undefine = 0; // 기타
+//   static const int U_FIngredident = 1; // 식재료
+//   static const int U_additional = 2;// 부가비용
+//   static const int U_Entertainment = 3;// 유흥비
+//   static const int U_Equipment = 4;// 장비
 //Budget({
 //     this.id,
 //     this.total,
