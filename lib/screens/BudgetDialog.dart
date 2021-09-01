@@ -252,7 +252,7 @@ class BudgetAnalyzeDialog extends StatelessWidget {
               height: 400,
               child: RadarChart(
                 RadarChartData(
-
+                  titlePositionPercentageOffset: 0.5,
                   dataSets: snapshot.data,
                   radarBackgroundColor: Colors.transparent,
                   borderData: FlBorderData(show: false),
@@ -280,8 +280,6 @@ class BudgetAnalyzeDialog extends StatelessWidget {
                     }
                   }
                 ),
-                swapAnimationCurve: Curves.linear,
-                swapAnimationDuration: Duration(milliseconds: 1000),
               )
             );
         }else if(snapshot.hasError){

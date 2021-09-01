@@ -44,7 +44,7 @@ class PieVM{
   }
   Future<List<RadarDataSet>> fetchRadar(DateTime day,Budget budget) async{
     List<Item> iList = await DBItemHelper.getItem();
-    List<double> cost = [1,1,1,1,1];
+    List<double> cost = [0.99999,1,1,1,1];
     List<RadarDataSet> dataSet = [];
     if(budget.repeat == 0){
       iList.where((item) =>
@@ -76,6 +76,7 @@ class PieVM{
       borderColor: AppColors.BgColorD,
       dataEntries: cost.map((e) => RadarEntry(value: e)).toList(),
     ));
+    log("dataset: ${dataSet.toString()}");
     return dataSet;
   }
   Future<void> insertBudget(Budget budget) async{
