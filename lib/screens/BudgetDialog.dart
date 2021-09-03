@@ -69,6 +69,9 @@ class _BudgetDialogState extends State<BudgetDialog> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0)
       ),
+      title: Center(
+        child: Text("예산안 추가"),
+      ),
       content: content(),
       actions: [
         TextButton(onPressed: () => onPressedConfirm(context), child: Text("확인")),
@@ -252,14 +255,14 @@ class BudgetAnalyzeDialog extends StatelessWidget {
               height: 400,
               child: RadarChart(
                 RadarChartData(
-                  titlePositionPercentageOffset: 0.5,
+                  titlePositionPercentageOffset: 0.1,
                   dataSets: snapshot.data,
                   radarBackgroundColor: Colors.transparent,
                   borderData: FlBorderData(show: false),
                   radarBorderData: const BorderSide(color: Colors.transparent),
                   tickBorderData: const BorderSide(color: Colors.transparent),
                   gridBorderData:  BorderSide(color: Colors.grey.withOpacity(0.5)),
-                  tickCount: 2,
+                  tickCount: 4,
                   ticksTextStyle: TextStyle(
                     fontSize: 10
                   ),
@@ -280,6 +283,7 @@ class BudgetAnalyzeDialog extends StatelessWidget {
                     }
                   }
                 ),
+                swapAnimationDuration: Duration(milliseconds: 800),
               )
             );
         }else if(snapshot.hasError){
@@ -297,29 +301,3 @@ class BudgetAnalyzeDialog extends StatelessWidget {
       });
   }
 }
-//vertices: [
-//                     PreferredSize(child:  Text("기타"),
-//                         preferredSize: Size.square(10)),
-//                     PreferredSize(child:  Text("식재료"),
-//                         preferredSize: Size.square(10)),
-//                     PreferredSize(child:  Text("부가비용"),
-//                         preferredSize: Size.square(10)),
-//                     PreferredSize(child:  Text("유흥비"),
-//                         preferredSize: Size.square(10)),
-//                     PreferredSize(child:  Text("장비"),
-//                         preferredSize: Size.square(10)),
-//                   ]
-//  static const int U_Undefine = 0; // 기타
-//   static const int U_FIngredident = 1; // 식재료
-//   static const int U_additional = 2;// 부가비용
-//   static const int U_Entertainment = 3;// 유흥비
-//   static const int U_Equipment = 4;// 장비
-//Budget({
-//     this.id,
-//     this.total,
-//     this.repeat,
-//     this.repeatDay,
-//     this.repeatP,
-//     this.stDay,
-//     this.edDay,
-//   });

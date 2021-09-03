@@ -59,6 +59,9 @@ class _ItemDialogState extends State<ItemDialog> {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0)),
+      title: Center(
+        child: Text("항목 추가"),
+      ),
       content: content(),
       actions: [
         TextButton(onPressed: () => clickAdd() , child: Text("추가")),
@@ -70,13 +73,13 @@ class _ItemDialogState extends State<ItemDialog> {
   Widget content(){
     return Container(
       width: 300,
-      height: 300,
+      height: 600,
       child: Center(
         child: ListView(
           shrinkWrap: true,
           children: [
             ListTile(title: TextField(decoration: textDecoration("상품명"),controller:nameTec,),),
-            ListTile(title: TextField(keyboardType: TextInputType.number,decoration: textDecoration("가격"),controller:costTec,),),
+            ListTile(title: TextField(keyboardType: TextInputType.number,decoration: textDecoration("가격",sf :"원"),controller:costTec),),
             ListTile(title: TextField(keyboardType: TextInputType.number,decoration: textDecoration("수량"),controller:amountTec,),),
             Text(statement),
             RadioListTile<int>(title: Text("기타"),value: Unit.U_Undefine, groupValue: _unitValue, onChanged: setUnit,),
