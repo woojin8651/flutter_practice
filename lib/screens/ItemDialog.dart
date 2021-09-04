@@ -34,7 +34,7 @@ class _ItemDialogState extends State<ItemDialog> {
   void clickAdd() async{
     if(nameTec.text.isEmpty){
       setState(() {
-        statement = "시발 이름좀 넣어";
+        statement = "항목명을 작성해 주세요";
       });
     }
     else {
@@ -81,7 +81,11 @@ class _ItemDialogState extends State<ItemDialog> {
             ListTile(title: TextField(decoration: textDecoration("상품명"),controller:nameTec,),),
             ListTile(title: TextField(keyboardType: TextInputType.number,decoration: textDecoration("가격",sf :"원"),controller:costTec),),
             ListTile(title: TextField(keyboardType: TextInputType.number,decoration: textDecoration("수량"),controller:amountTec,),),
-            Text(statement),
+            Center(
+              child: Text(statement,style: TextStyle(
+                color: Colors.redAccent
+              ),),
+            ),
             RadioListTile<int>(title: Text("기타"),value: Unit.U_Undefine, groupValue: _unitValue, onChanged: setUnit,),
             RadioListTile<int>(title: Text("식재료"),value: Unit.U_FIngredident, groupValue: _unitValue, onChanged: setUnit),
             RadioListTile<int>(title: Text("부가비용"),value: Unit.U_additional, groupValue: _unitValue, onChanged: setUnit),

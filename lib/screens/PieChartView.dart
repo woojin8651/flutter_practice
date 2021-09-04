@@ -6,6 +6,7 @@ import 'package:flutter_practice_app/model/Budget.dart';
 import 'package:flutter_practice_app/screens/BudgetDialog.dart';
 import 'package:flutter_practice_app/viewmodel/PieVM.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:flutter_practice_app/extension/date_extention.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class PieChartView extends StatefulWidget {
@@ -86,6 +87,7 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
       viewportFraction: 0.7,
       keepPage: false
   );
+
   Widget budgetChart(List<PieSet> datas){
     return PageView.builder(
         onPageChanged: (idx){
@@ -110,11 +112,7 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(datas[idx].budget.stDay),
-                      Text("~"),
-                      Text(datas[idx].budget.edDay),
-                    ],
+                    children: vm.getTextDateList(budget:datas[idx].budget,day: _pageDate),
                   ),
                 ),
                 Container(
@@ -215,7 +213,7 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
   void showBudgetDialog() async{
     log("클릭");
     await showDialog(context: context,
-        builder: (ctx) => BudgetDialog(refresh:this.widget.refresh));
+        builder: (ctx) => BudgetDialog(refresh:this.widget.refresh,pageDate: _pageDate,));
   }
   Future<bool> showBudgetDeleteDialog(Budget budget) async{
     return await showDialog(context: context, builder: (ctx)=> BudgetDeleteDialog(

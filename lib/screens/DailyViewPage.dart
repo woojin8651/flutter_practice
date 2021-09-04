@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_app/extension/Colors.dart';
 import 'package:flutter_practice_app/model/Item.dart';
+import 'package:flutter_practice_app/model/Unit.dart';
 import 'package:flutter_practice_app/viewmodel/HomeVM.dart';
 import 'package:flutter_practice_app/extension/date_extention.dart';
 import 'ItemDialog.dart';
@@ -146,8 +147,14 @@ class _DailyViewPageState extends State<DailyViewPage> {
                         builder: (ctx) => ItemLongDialog(item: e,refresh: this.widget.refresh,));
                   },
                   title: ItemTitleText(e.name),
-                  subtitle: ItemContentText("${e.amount}개  ${e.cost}원\n"
-                      "1개 당 ${(e.cost / e.amount).toDouble()}원"),
+                  subtitle: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ItemContentText("${e.amount}개  ${e.cost}원\n"
+                          "1개 당 ${(e.cost / e.amount).toDouble()}원"),
+                      ItemContentText("${Unit.unitString[e.unitCode]}")
+                    ],
+                  ),
                 )
             )).toList(),
           ),

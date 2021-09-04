@@ -102,6 +102,47 @@ class PieVM{
       throw Exception("insert error");
     }
   }
+
+  List<Widget> getTextDateList({Budget budget,DateTime day,int repeatD = 1}){
+    List<Widget> ret = [];
+    String prev,next;
+    int repeatDay;
+    if(budget!=null){
+      repeatDay = budget.repeatDay;
+      if(budget.repeat == 0){
+        ret.add(Text(budget.stDay));
+        ret.add(Text("~"));
+        ret.add(Text(budget.edDay));
+      }
+      else{
+        if(day.day<budget.repeatDay){ // 이전
+          prev = Formats.dfm.format(DateTime(day.year,day.month-1,repeatDay));
+          next = Formats.dfm.format(DateTime(day.year,day.month,repeatDay-1));
+        }
+        else{ //이후
+          prev = Formats.dfm.format(DateTime(day.year,day.month,repeatDay));
+          next = Formats.dfm.format(DateTime(day.year,day.month+1,repeatDay-1));
+        }
+        ret.add(Text(prev));
+        ret.add(Text("~"));
+        ret.add(Text(next));
+      }
+    }else{
+      repeatDay = repeatD;
+      if(day.day<repeatD){ // 이전
+        prev = Formats.dfm.format(DateTime(day.year,day.month-1,repeatDay));
+        next = Formats.dfm.format(DateTime(day.year,day.month,repeatDay-1));
+      }
+      else{ //이후
+        prev = Formats.dfm.format(DateTime(day.year,day.month,repeatDay));
+        next = Formats.dfm.format(DateTime(day.year,day.month+1,repeatDay-1));
+      }
+      ret.add(Text(prev));
+      ret.add(Text("~"));
+      ret.add(Text(next));
+    }
+    return ret;
+  }
 }
 class PieSet{
   Map<String,double> PieData;

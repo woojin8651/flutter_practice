@@ -38,6 +38,7 @@ dependencies:
   flutter_speed_dial: ^3.0.0
   syncfusion_flutter_datepicker: ^19.2.57
   fl_chart: ^0.36.4
+  numberpicker: ^2.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

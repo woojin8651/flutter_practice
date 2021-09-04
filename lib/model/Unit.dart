@@ -7,4 +7,5 @@ class Unit{
   static const int U_Equipment = 4;// 장비
 
   static const int UnitCount = 5; //항목 갯수
+  static const List<String> unitString = ["기타","식재료","부가비용","유흥비","장비"];
 }

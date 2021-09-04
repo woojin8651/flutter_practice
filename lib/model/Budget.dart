@@ -12,8 +12,8 @@ class Budget{
   static const String repeatYear = "year";
   static const int modeUnRepeat = 0;
   static const int modeRepeat = 1;
-  static const int defaultRepeatDay = 0;
-  static const String defaultRepeatP = "미정";
+  static const int defaultRepeatDay = 1;
+  static const String defaultRepeatP = repeatMonth; //default month
   static const String defaultDay = "0000-00-00";
   String id; //고유 아이디
   int total; //기간 예산안
