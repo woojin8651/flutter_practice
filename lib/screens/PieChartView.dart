@@ -46,7 +46,7 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
 
     return Container(
       padding: EdgeInsets.all(20.0),
-      child: piePages(),
+      child: piePages()
     );
   }
   Widget piePages(){
@@ -55,9 +55,19 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
         borderRadius: BorderRadius.circular(20.0),
         child: Container(
           color: Colors.white,
-          width: 400,
-          height: 400,
+          height: 500,
+          width:  400,
           child: Scaffold(
+            appBar: AppBar(
+              title: Center(
+                child: Text("예산 분석",style: TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.w100,
+                color: Colors.black),
+                ),
+              ),
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+            ),
             body:  FutureBuilder(
               future: vm.fetchPie(_pageDate),
               builder: (ctx,snapshot){
