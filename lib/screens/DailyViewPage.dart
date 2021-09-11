@@ -51,8 +51,8 @@ class _DailyViewPageState extends State<DailyViewPage> {
       child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
           child: Container(
-            width: 400,
-            height: 400,
+            width: MediaQuery.of(context).size.width*4/5,
+            height: MediaQuery.of(context).size.width*4/5,
             decoration: BoxDecoration(gradient: AppColors.BgGradient),
             child: Scaffold(
                 backgroundColor: Colors.transparent,
@@ -136,8 +136,8 @@ class _DailyViewPageState extends State<DailyViewPage> {
         Container(
           padding: EdgeInsets.all(5),
           decoration: itemListBoxDecoration,
-          width: 300,
-          height: 300,
+          width: MediaQuery.of(context).size.width*4/5 - 100,
+          height: MediaQuery.of(context).size.width*4/5 - 100,
           child: ListView(
             children: data.map((e) => ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
@@ -151,7 +151,7 @@ class _DailyViewPageState extends State<DailyViewPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ItemContentText("${e.amount}개  ${e.cost}원\n"
-                          "1개 당 ${(e.cost / e.amount).toDouble()}원"),
+                          "1개 당 ${e.cost ~/ e.amount}원"),
                       ItemContentText("${Unit.unitString[e.unitCode]}")
                     ],
                   ),

@@ -20,6 +20,13 @@ extension DateOnlyCompare on DateTime {
 }
 class Formats{
   static DateFormat dfm = DateFormat("yyyy-MM-dd");
+  static int compareDateWithString(String a,String b) {
+    if(Formats.dfm.parse(a).isBefore(Formats.dfm.parse(b)))
+      return -1;
+    else if(Formats.dfm.parse(a).isAfter(Formats.dfm.parse(b)))
+      return 1;
+    else return 0;
+  }
 }
 class DateCalculation{
   static bool inRange(String st,String ed,String cmp){ //st 랑 ed 사이에 cmp가 있나

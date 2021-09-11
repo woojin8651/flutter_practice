@@ -55,8 +55,8 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
         borderRadius: BorderRadius.circular(20.0),
         child: Container(
           color: Colors.white,
-          width: 400,
-          height: 400,
+          width: MediaQuery.of(context).size.width*4/5,
+          height: MediaQuery.of(context).size.width*4/5,
           child: Scaffold(
             body:  FutureBuilder(
               future: vm.fetchPie(_pageDate),
@@ -116,8 +116,8 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
                   ),
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width*2/3,
-                  height: MediaQuery.of(context).size.width*2/3,
+                  width: MediaQuery.of(context).size.width*4/5-100,
+                  height: MediaQuery.of(context).size.width*4/5-100,
                   child: PieChart(
                     dataMap: datas[idx].PieData,
                     animationDuration: Duration(milliseconds: 1000),
