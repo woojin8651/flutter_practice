@@ -55,6 +55,16 @@ class _DailyViewPageState extends State<DailyViewPage> {
             height: MediaQuery.of(context).size.width*4/5,
             decoration: BoxDecoration(gradient: AppColors.BgGradient),
             child: Scaffold(
+              appBar: AppBar(
+                title: Center(
+                  child: Text("일간 소비",style: TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w100,
+                      color: Colors.white),
+                  ),
+                ),
+                shadowColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
+              ),
                 backgroundColor: Colors.transparent,
                 body: PageView.builder(
                   controller:  PageController(initialPage: indexOffset,

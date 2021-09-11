@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_app/extension/Colors.dart';
+import 'package:flutter_practice_app/screens/Month.dart';
 import 'package:flutter_practice_app/screens/loading.dart';
 import 'screens/Home.dart';
 import 'package:flutter_practice_app/screens/Home.dart';
@@ -34,7 +35,7 @@ class Main extends StatefulWidget {
 
 class _MainState extends State<Main> {
   int currIdx = 0;
-  final List<Widget> Pages = [Home(),Loading()];
+  final List<Widget> Pages = [Home(),Month()];
   void onTap(int idx){
     setState(() {
       currIdx = idx;

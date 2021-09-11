@@ -58,6 +58,16 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
           width: MediaQuery.of(context).size.width*4/5,
           height: MediaQuery.of(context).size.width*4/5,
           child: Scaffold(
+            appBar: AppBar(
+              title: Center(
+                child: Text("예산 분석",style: TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.w100,
+                color: Colors.black),
+                ),
+              ),
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+            ),
             body:  FutureBuilder(
               future: vm.fetchPie(_pageDate),
               builder: (ctx,snapshot){
@@ -116,8 +126,8 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
                   ),
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width*4/5-100,
-                  height: MediaQuery.of(context).size.width*4/5-100,
+                  width: MediaQuery.of(context).size.width*2/3,
+                  height: MediaQuery.of(context).size.width*2/3,
                   child: PieChart(
                     dataMap: datas[idx].PieData,
                     animationDuration: Duration(milliseconds: 1000),
