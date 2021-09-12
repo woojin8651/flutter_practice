@@ -11,11 +11,8 @@ class MonthData{
 class DateSum{
   int day;
   int cost;
-
   DateSum({this.day = 1,this.cost = 0});
-
   void addCost(int cost){
     this.cost += cost;
   }
-
 }

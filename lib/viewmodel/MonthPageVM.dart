@@ -23,10 +23,10 @@ class MonthPageVM{
             month: Formats.dfm.parse(element.date).month,
             year:Formats.dfm.parse(element.date).year,
             dateSum: []));
-
-
+      if(monthList.last.dateSum.isEmpty || monthList.last.dateSum.last.day<Formats.dfm.parse(element.date).day)
+        monthList.last.dateSum.add(DateSum(day: Formats.dfm.parse(element.date).day));
+      monthList.last.dateSum.last.addCost(element.cost);
     });
     return monthList;
   }
-
 }

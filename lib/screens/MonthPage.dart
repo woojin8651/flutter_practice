@@ -9,7 +9,6 @@ class MonthPage extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width*4/5, 
         height: MediaQuery.of(context).size.width*4/5,
-      child: ,
     );
   }
 }
