@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_practice_app/extension/date_extention.dart';
 import 'package:flutter_practice_app/model/DBItemHelper.dart';
 import 'package:flutter_practice_app/model/Item.dart';
@@ -27,6 +29,8 @@ class MonthPageVM{
         monthList.last.dateSum.add(DateSum(day: Formats.dfm.parse(element.date).day));
       monthList.last.dateSum.last.addCost(element.cost);
     });
+    log("MonthList,${monthList.toString()}");
     return monthList;
+
   }
 }

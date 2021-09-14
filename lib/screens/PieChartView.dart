@@ -111,13 +111,6 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
           return Center(
             child: Column(
               children: [
-                Center(
-                  child: Text("예산: ${datas[idx].budget.total}원")
-                ),
-                Center(
-                    child: datas[idx].PieData[PieVM.PieItem] != null ?
-                    Text("사용: ${ datas[idx].PieData[PieVM.PieItem].toInt()}원"): Text("사용: 0원")
-                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -126,8 +119,8 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
                   ),
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width*2/3,
-                  height: MediaQuery.of(context).size.width*2/3,
+                  width: MediaQuery.of(context).size.width*4/5,
+                  height: MediaQuery.of(context).size.width*4/5-200,
                   child: PieChart(
                     dataMap: datas[idx].PieData,
                     animationDuration: Duration(milliseconds: 1000),
@@ -140,11 +133,23 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
                     ),
                   ),
                 ),
+                Center(
+                    child: Text("예산: ${datas[idx].budget.total}원",style: styleB
+                      )
+                ),
+                Center(
+                    child: datas[idx].PieData[PieVM.PieItem] != null ?
+                    Text("사용: ${ datas[idx].PieData[PieVM.PieItem].toInt()}원",
+                    style: styleB,): Text("사용: 0원",style: styleB,)
+                ),
+
               ],
             ),
           );
         });
   }
+  final styleB = TextStyle(
+      fontSize: 10,);
   final styleT = TextStyle(
       fontWeight: FontWeight.w500,
       color: Colors.white,

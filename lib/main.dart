@@ -51,8 +51,8 @@ class _MainState extends State<Main> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home),
               label: "Home",),
-          BottomNavigationBarItem(icon: Icon(Icons.settings),
-              label: "setting",)
+          BottomNavigationBarItem(icon: Icon(Icons.calendar_today),
+              label: "Month",)
         ],
         selectedItemColor: Colors.grey[700],
         unselectedItemColor: Colors.grey,
