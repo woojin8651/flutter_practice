@@ -45,49 +45,45 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
   Widget build(BuildContext context) {
 
     return Container(
-      padding: EdgeInsets.all(20.0),
       child: piePages(),
     );
   }
   Widget piePages(){
     return Center(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
-        child: Container(
-          color: Colors.white,
-          width: MediaQuery.of(context).size.width*4/5,
-          height: MediaQuery.of(context).size.width*4/5,
-          child: Scaffold(
-            appBar: AppBar(
-              title: Center(
-                child: Text("예산 분석",style: TextStyle(
+      child:Container(
+        color: Colors.white,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height/2,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Center(
+              child: Text("예산 분석",style: TextStyle(
                   fontSize: 20, fontWeight: FontWeight.w100,
-                color: Colors.black),
-                ),
+                  color: Colors.black),
               ),
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
             ),
-            body:  FutureBuilder(
-              future: vm.fetchPie(_pageDate),
-              builder: (ctx,snapshot){
-                if(snapshot.hasData){
-                  return budgetChart(snapshot.data);
-                }
-                else if(snapshot.hasError){
-                  return Center(child: Text("에러"));
-                }
-                return Center(
-                  child: SizedBox(
-                    child: CircularProgressIndicator(),
-                    height: 100,
-                    width: 100,
-                  ),
-                );
-              },
-            ),
-            floatingActionButton: _getFSD(),
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
           ),
+          body:  FutureBuilder(
+            future: vm.fetchPie(_pageDate),
+            builder: (ctx,snapshot){
+              if(snapshot.hasData){
+                return budgetChart(snapshot.data);
+              }
+              else if(snapshot.hasError){
+                return Center(child: Text("에러"));
+              }
+              return Center(
+                child: SizedBox(
+                  child: CircularProgressIndicator(),
+                  height: 100,
+                  width: 100,
+                ),
+              );
+            },
+          ),
+          floatingActionButton: _getFSD(),
         ),
       ),
     );
@@ -119,8 +115,8 @@ class _PieChartViewState extends State<PieChartView> with TickerProviderStateMix
                   ),
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width*4/5,
-                  height: MediaQuery.of(context).size.width*4/5-200,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height/2-200,
                   child: PieChart(
                     dataMap: datas[idx].PieData,
                     animationDuration: Duration(milliseconds: 1000),

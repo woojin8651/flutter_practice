@@ -53,7 +53,7 @@ class Chart extends StatelessWidget {
               );
             }
             else if(snap.hasError)
-              return Text("에러");
+              return Text("저장된 데이터가 없습니다.");
             return Center(
               child: SizedBox(
                 child: CircularProgressIndicator(),
@@ -113,7 +113,8 @@ class Chart extends StatelessWidget {
       lineBarsData: [
         LineChartBarData(
         spots:makeSpot(monthDatas),
-        isCurved: false,
+        isCurved: true,
+        preventCurveOverShooting: true,
         colors: gradientColors,
         barWidth: 5,
         isStrokeCapRound: true,

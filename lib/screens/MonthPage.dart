@@ -14,8 +14,8 @@ class MonthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height/2,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height/2,
       color: Colors.black.withOpacity(0.5),
       child:
       Scaffold(
@@ -41,7 +41,8 @@ class MonthPage extends StatelessWidget {
               );
             }
             else if(snapshot.hasError){
-              return Text("MonthPage 에러");
+              return Container(child: Text("저장된 데이터가 없습니다."),
+              padding: EdgeInsets.all(30),);
             }
             return  Center(
               child: SizedBox(

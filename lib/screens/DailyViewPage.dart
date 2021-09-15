@@ -41,52 +41,48 @@ class _DailyViewPageState extends State<DailyViewPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
       child: dailyPages(),
     );
   }
   //
   Widget dailyPages(){
     return Center(
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: Container(
-            width: MediaQuery.of(context).size.width*4/5,
-            height: MediaQuery.of(context).size.width*4/5,
-            decoration: BoxDecoration(gradient: AppColors.BgGradient),
-            child: Scaffold(
-              appBar: AppBar(
-                title: Center(
-                  child: Text("일간 소비",style: TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w100,
-                      color: Colors.white),
-                  ),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height/2,
+        decoration: BoxDecoration(gradient: AppColors.BgGradient),
+        child: Scaffold(
+            appBar: AppBar(
+              title: Center(
+                child: Text("일간 소비",style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.w100,
+                    color: Colors.white),
                 ),
-                shadowColor: Colors.transparent,
-                backgroundColor: Colors.transparent,
               ),
-                backgroundColor: Colors.transparent,
-                body: PageView.builder(
-                  controller:  PageController(initialPage: indexOffset,
-                      viewportFraction: 0.7),
-                  itemBuilder: (ctx,idx) {
-                    return dayPage(pageDate.add(Duration(days: idx - indexOffset)));
-                  },
-                  onPageChanged: (idx){
-                    setCurrDate(pageDate.add(Duration(days: idx - indexOffset)));
-                  },
-                ),
-                floatingActionButton: FloatingActionButton(
-                  elevation: 0,
-                  backgroundColor: Colors.white.withOpacity(0.7),
-                  child: Icon(Icons.add, color: AppColors.BgColorD,),
-                  onPressed: (){
-                    showItemDialog();
-                  },
-                )
+              shadowColor: Colors.transparent,
+              backgroundColor: Colors.transparent,
             ),
-          )
-      ),
+            backgroundColor: Colors.transparent,
+            body: PageView.builder(
+              controller:  PageController(initialPage: indexOffset,
+                  viewportFraction: 0.7),
+              itemBuilder: (ctx,idx) {
+                return dayPage(pageDate.add(Duration(days: idx - indexOffset)));
+              },
+              onPageChanged: (idx){
+                setCurrDate(pageDate.add(Duration(days: idx - indexOffset)));
+              },
+            ),
+            floatingActionButton: FloatingActionButton(
+              elevation: 0,
+              backgroundColor: Colors.white.withOpacity(0.7),
+              child: Icon(Icons.add, color: AppColors.BgColorD,),
+              onPressed: (){
+                showItemDialog();
+              },
+            )
+        ),
+      )
     );
   }
   //페이지
