@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'Item.dart';
 
 class MonthData{
@@ -6,7 +8,10 @@ class MonthData{
   int month;
   int year;
   List<DateSum> dateSum;
-
+  int maxDateSum(){
+    if(dateSum.isEmpty) return 0;
+    return dateSum.fold(0, (p, e) => max(p,e.cost));
+  }
 }
 class DateSum{
   int day;
@@ -15,4 +20,5 @@ class DateSum{
   void addCost(int cost){
     this.cost += cost;
   }
+
 }

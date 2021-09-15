@@ -20,7 +20,7 @@ class MonthPageVM{
     //날짜순 정렬
 
     item.forEach((element) {
-      if(monthList.isEmpty||monthList.last.month<Formats.dfm.parse(element.date).month)
+      if(monthList.isEmpty||monthList.last.month<Formats.dfm.parse(element.date).month||monthList.last.year<Formats.dfm.parse(element.date).year)
         monthList.add(MonthData(
             month: Formats.dfm.parse(element.date).month,
             year:Formats.dfm.parse(element.date).year,
@@ -29,7 +29,7 @@ class MonthPageVM{
         monthList.last.dateSum.add(DateSum(day: Formats.dfm.parse(element.date).day));
       monthList.last.dateSum.last.addCost(element.cost);
     });
-    log("MonthList,${monthList.toString()}");
+    log("MonthList,${monthList.last.month}");
     return monthList;
 
   }
